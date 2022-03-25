@@ -60,3 +60,5 @@ function game() {
 
     (playerScore > computerScore) ? console.log('You won the match!') : console.log('You lost the match...');
 }
+
+game();
