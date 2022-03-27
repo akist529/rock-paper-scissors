@@ -1,3 +1,5 @@
+// JAVASCRIPT FILE FOR ROCK PAPER SCISSORS
+
 function computerPlay() {
     let choices = ['Rock', 'Paper', 'Scissors'];
 
@@ -28,11 +30,20 @@ function game() {
     let result;
     let playerScore = 0;
     let computerScore = 0;
+    let gameCount = 0;
+
+    let howToText = document.getElementById("how-to-play");
+    howToText.style.display = "none";
+
+    let gameText = document.getElementById("Games");
+
+    gameText.style.display = "flex";
 
     for (let i = 0; i < 5; i++)
     {
         let playerChoice;
         let computerChoice;
+        gameCount++;
 
         while (playerChoice !== 'Rock' && playerChoice !== 'Paper' && playerChoice !== 'Scissors') {
             playerChoice = prompt('Rock, Paper, or Scissors? Make your choice: ');
@@ -49,16 +60,29 @@ function game() {
         if (result === 'Tie!')  {
             playerScore++;
             computerScore++;
+            document.getElementById(`Game${gameCount}`).textContent = "Tie!";
         }
         else if (result === `You lose! ${computerChoice} beats ${playerChoice}`)    {
             computerScore++;
+            document.getElementById(`Game${gameCount}`).textContent = `You lose! ${computerChoice} beats ${playerChoice}`;
         }
         else if (result === `You win! ${playerChoice} beats ${computerChoice}`)     {
             playerScore++;
+            document.getElementById(`Game${gameCount}`).textContent = `You win! ${playerChoice} beats ${computerChoice}`;
         }
     }
 
     (playerScore > computerScore) ? console.log('You won the match!') : console.log('You lost the match...');
+
+    (playerScore > computerScore) ? document.getElementById("outcome").textContent = "You won the match!" : document.getElementById("outcome").textContent = "You lost the match...";
 }
 
-game();
+function howTo() {
+    let gameText = document.getElementById("Games");
+
+    gameText.style.display = "none";
+
+    let howToText = document.getElementById("how-to-play");
+
+    howToText.style.display = 'block';
+}

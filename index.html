@@ -3,10 +3,54 @@
     <head>
         <meta charset="utf-8"/>
         <title>Rock Paper Scissors</title>
+        <link rel="stylesheet" href="./styles.css"/>
     </head>
     <body>
-        <script type="text/javascript" src="./script.js">
-            
-        </script>
+        <div id="header">
+            <h1>Welcome to...</h1>
+            <div id="title">
+                <h2>Rock</h2>
+                <h2>Paper</h2>
+                <h2>Scissors</h2>
+            </div>
+            <div id="buttons">
+                <button type="button" onclick="game()">Play a Match</button>
+                <button type="button" onclick="howTo()">How To Play</button>
+            </div>
+        </div>
+        <div id="how-to-play">
+            <p>Rock Paper Scissors is a simple 2-player game typically played using the hands. Players take turns forming one of three shapes to indicate their choice: rock (using a closed fist), paper (using a flat hand), or scissors (a closed fist with two outstretched fingers, resembling a peace sign).</p>
+            <p>Each choice beats one other choice, is defeated by another choice, and in the event that the other player picks the same choice, results in a tie.</p>
+            <div class="how-to">
+                <h2>Rock</h2>
+                <ul>
+                    <li>Beats: Scissors</li>
+                    <li>Loses to: Paper</li>
+                </ul>
+            </div>
+            <div class="how-to">
+                <h2>Paper</h2>
+                <ul>
+                    <li>Beats: Rock</li>
+                    <li>Loses to: Scissors</li>
+                </ul>
+            </div>
+            <div class="how-to">
+                <h2>Scissors</h2>
+                <ul>
+                    <li>Beats: Paper</li>
+                    <li>Loses to: Rock</li>
+                </ul>
+            </div>
+        </div>
+        <div id="Games">
+            <h3 id="Game1"></h2>
+            <h3 id="Game2"></h2>
+            <h3 id="Game3"></h2>
+            <h3 id="Game4"></h2>
+            <h3 id="Game5"></h2>
+            <h3 id="outcome"></h2>
+        </div>
+        <script type="text/javascript" src="./script.js"></script>
     </body>
 </html>
