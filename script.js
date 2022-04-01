@@ -8,73 +8,58 @@ function computerPlay() {
     return choice;
 }
 
-function playRound(playerSelection, computerSelection) {
-    if (playerSelection === computerSelection) {
-        return 'Tie!';
+function playRound(playerChoice, computerChoice) {
+    let playerScore = Number(document.getElementById('player-scoreboard').textContent);
+    let computerScore = Number(document.getElementById('computer-scoreboard').textContent);
+
+    let result = document.getElementById('game-result').textContent;
+
+    if (playerChoice === computerChoice) {
+        result = 'Tie!';
+        return;
     }
 
-    let playerLose = `You lose! ${computerSelection} beats ${playerSelection}`;
-    let playerWin = `You win! ${playerSelection} beats ${computerSelection}`;
+    let playerLose = `You lose! ${computerChoice} beats ${playerChoice}`;
+    let playerWin = `You win! ${playerChoice} beats ${computerChoice}`;
 
-    switch (playerSelection) {
-        case 'Rock':
-            return (computerSelection === 'Paper') ? playerLose : playerWin;
-        case 'Paper':
-            return (computerSelection === 'Scissors') ? playerLose: playerWin;
-        case 'Scissors':
-            return (computerSelection === 'Rock') ? playerLose: playerWin;
+    if (playerChoice === 'Rock' && computerChoice === 'Paper' 
+        || playerChoice === 'Paper' && computerChoice === 'Scissors' 
+        || playerChoice === 'Scissors' && computerChoice === 'Rock')
+    {
+        result = playerLose;
+        computerScore++;
+    }
+    else
+    {
+        result = playerWin;
+        playerScore++;
     }
 }
 
 function game() {
-    let result;
-    let playerScore = 0;
-    let computerScore = 0;
-    let gameCount = 0;
+    let Games = document.getElementById('Games');
+    Games.style.display = 'flex';
+
+    let playerScore = Number(document.getElementById('player-scoreboard').textContent);
+    let computerScore = Number(document.getElementById('computer-scoreboard').textContent);
 
     let howToText = document.getElementById("how-to-play");
     howToText.style.display = "none";
 
-    let gameText = document.getElementById("Games");
+    let rockBtn = document.getElementById("rock-btn");
+    let paperBtn = document.getElementById("paper-btn");
+    let scisBtn = document.getElementById("scis-btn");
 
-    gameText.style.display = "flex";
+    rockBtn.addEventListener('click', () => playRound('rock', computerPlay));
+    paperBtn.addEventListener('click', () => playRound('paper', computerPlay));
+    scisBtn.addEventListener('click', () => playRound('scissors', computerPlay));
 
-    for (let i = 0; i < 5; i++)
-    {
-        let playerChoice;
-        let computerChoice;
-        gameCount++;
-
-        while (playerChoice !== 'Rock' && playerChoice !== 'Paper' && playerChoice !== 'Scissors') {
-            playerChoice = prompt('Rock, Paper, or Scissors? Make your choice: ');
-
-            playerChoice = playerChoice[0].toUpperCase() + playerChoice.substring(1).toLowerCase();
-        }
-
-        computerChoice = computerPlay();
-
-        result = playRound(playerChoice, computerChoice);
-
-        console.log(result);
-
-        if (result === 'Tie!')  {
-            playerScore++;
-            computerScore++;
-            document.getElementById(`Game${gameCount}`).textContent = "Tie!";
-        }
-        else if (result === `You lose! ${computerChoice} beats ${playerChoice}`)    {
-            computerScore++;
-            document.getElementById(`Game${gameCount}`).textContent = `You lose! ${computerChoice} beats ${playerChoice}`;
-        }
-        else if (result === `You win! ${playerChoice} beats ${computerChoice}`)     {
-            playerScore++;
-            document.getElementById(`Game${gameCount}`).textContent = `You win! ${playerChoice} beats ${computerChoice}`;
-        }
+    if (playerScore === 5) {
+        document.getElementById('game-result').textContent = 'You won the match!';
     }
-
-    (playerScore > computerScore) ? console.log('You won the match!') : console.log('You lost the match...');
-
-    (playerScore > computerScore) ? document.getElementById("outcome").textContent = "You won the match!" : document.getElementById("outcome").textContent = "You lost the match...";
+    else if (computerScore === 5) {
+        document.getElementById('computer-result').textContent = 'You lost the match...';
+    }
 }
 
 function howTo() {

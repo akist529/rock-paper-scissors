@@ -18,9 +18,13 @@ li {
     justify-content: center;
 }
 
-#buttons {
+.buttons {
     display: flex;
     justify-content: space-around;
+}
+
+.scoreboard {
+    display: flex;
 }
 
 #header {

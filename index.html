@@ -13,7 +13,7 @@
                 <h2>Paper</h2>
                 <h2>Scissors</h2>
             </div>
-            <div id="buttons">
+            <div class="buttons">
                 <button type="button" onclick="game()">Play a Match</button>
                 <button type="button" onclick="howTo()">How To Play</button>
             </div>
@@ -44,12 +44,18 @@
             </div>
         </div>
         <div id="Games">
-            <h3 id="Game1"></h2>
-            <h3 id="Game2"></h2>
-            <h3 id="Game3"></h2>
-            <h3 id="Game4"></h2>
-            <h3 id="Game5"></h2>
-            <h3 id="outcome"></h2>
+            <div class="buttons">
+                <button id="rock-btn">Rock</button>
+                <button id="paper-btn">Paper</button>
+                <button id="scis-btn">Scissors</button>
+            </div>
+            <div id="results">
+                <div id="scoreboard">
+                    <h3 id="player-scoreboard">0</h3>
+                    <h3 id="computer-scoreboard">0</h3>
+                </div>
+                <h3 id="game-result"></h2>
+            </div>
         </div>
         <script type="text/javascript" src="./script.js"></script>
     </body>
