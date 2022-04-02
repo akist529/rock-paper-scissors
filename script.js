@@ -1,7 +1,7 @@
 // JAVASCRIPT FILE FOR ROCK PAPER SCISSORS
 
 function computerPlay() {
-    let choices = ['Rock', 'Paper', 'Scissors'];
+    let choices = ['rock', 'paper', 'scissors'];
 
     let choice = choices[Math.floor(Math.random() * 3)];
 
@@ -12,62 +12,73 @@ function playRound(playerChoice, computerChoice) {
     let playerScore = Number(document.getElementById('player-scoreboard').textContent);
     let computerScore = Number(document.getElementById('computer-scoreboard').textContent);
 
-    let result = document.getElementById('game-result').textContent;
-
     if (playerChoice === computerChoice) {
-        result = 'Tie!';
+        document.getElementById('game-result').textContent = 'Tie!';
         return;
     }
+    
+    console.log(computerChoice);
 
     let playerLose = `You lose! ${computerChoice} beats ${playerChoice}`;
     let playerWin = `You win! ${playerChoice} beats ${computerChoice}`;
 
-    if (playerChoice === 'Rock' && computerChoice === 'Paper' 
-        || playerChoice === 'Paper' && computerChoice === 'Scissors' 
-        || playerChoice === 'Scissors' && computerChoice === 'Rock')
+    if (
+        (playerChoice === 'rock' && computerChoice === 'paper')
+        || (playerChoice === 'paper' && computerChoice === 'scissors') 
+        || (playerChoice === 'scissors' && computerChoice === 'rock'))
     {
-        result = playerLose;
         computerScore++;
+        document.getElementById('computer-scoreboard').textContent = computerScore;
+
+        if (Number(document.getElementById('computer-scoreboard').textContent) === 5) {
+            document.getElementById('game-result').textContent = 'You lost the match...';
+            reset();
+            return;
+        }
+        
+        document.getElementById('game-result').textContent = playerLose;
     }
     else
     {
-        result = playerWin;
         playerScore++;
+        document.getElementById('player-scoreboard').textContent = playerScore;
+
+        if (Number(document.getElementById('player-scoreboard').textContent) === 5) {
+            document.getElementById('game-result').textContent = 'You won the match!';
+            reset();
+            return;
+        }
+
+        document.getElementById('game-result').textContent = playerWin;
     }
 }
 
 function game() {
-    let Games = document.getElementById('Games');
-    Games.style.display = 'flex';
-
-    let playerScore = Number(document.getElementById('player-scoreboard').textContent);
-    let computerScore = Number(document.getElementById('computer-scoreboard').textContent);
-
     let howToText = document.getElementById("how-to-play");
     howToText.style.display = "none";
 
-    let rockBtn = document.getElementById("rock-btn");
-    let paperBtn = document.getElementById("paper-btn");
-    let scisBtn = document.getElementById("scis-btn");
+    let games = document.getElementById('games');
+    games.style.display = 'flex';
 
-    rockBtn.addEventListener('click', () => playRound('rock', computerPlay));
-    paperBtn.addEventListener('click', () => playRound('paper', computerPlay));
-    scisBtn.addEventListener('click', () => playRound('scissors', computerPlay));
-
-    if (playerScore === 5) {
-        document.getElementById('game-result').textContent = 'You won the match!';
-    }
-    else if (computerScore === 5) {
-        document.getElementById('computer-result').textContent = 'You lost the match...';
-    }
+    document.getElementById("rock-btn").addEventListener("click", function()
+    { playRound('rock', computerPlay()) });
+    document.getElementById("paper-btn").addEventListener("click", function()
+    { playRound('paper', computerPlay()) });
+    document.getElementById("scis-btn").addEventListener("click", function()
+    { playRound('scissors', computerPlay()) });
 }
 
 function howTo() {
-    let gameText = document.getElementById("Games");
+    let gameText = document.getElementById("games");
 
     gameText.style.display = "none";
 
     let howToText = document.getElementById("how-to-play");
 
     howToText.style.display = 'block';
+}
+
+function reset() {
+    document.getElementById('player-scoreboard').textContent = 0;
+    document.getElementById('computer-scoreboard').textContent = 0;
 }
